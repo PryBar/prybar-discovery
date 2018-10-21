@@ -13,13 +13,13 @@ import net.stickycode.stereotype.StickyComponent;
 
 public class Application {
 
-  private List<PrybarComponent> components = new ArrayList<>();
+  private List<PrybarComponentDefinition> components = new ArrayList<>();
 
-  public List<PrybarComponent> getComponents() {
+  public List<PrybarComponentDefinition> getComponents() {
     return components;
   }
 
-  public void setComponents(List<PrybarComponent> components) {
+  public void setComponents(List<PrybarComponentDefinition> components) {
     this.components = components;
   }
 
@@ -30,7 +30,7 @@ public class Application {
     List<String> componentsTypes = scanner
       .getNamesOfClassesWithAnnotationsAnyOf(componentAnnotations.toArray(new String[componentAnnotations.size()]));
     for (String type : componentsTypes) {
-      components.add(new PrybarComponent(type));
+      components.add(new PrybarComponentDefinition(type));
     }
   }
 
@@ -38,7 +38,7 @@ public class Application {
     DumperOptions options = new DumperOptions();
     options.setAllowReadOnlyProperties(true);
     options.setDefaultFlowStyle(FlowStyle.BLOCK);
-//    options.setPrettyFlow(true);
+    // options.setPrettyFlow(true);
     Yaml yaml = new Yaml(options);
     return yaml.dump(this);
   }

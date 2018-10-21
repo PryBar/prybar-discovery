@@ -39,6 +39,12 @@
     </dependency>
 
     <dependency>
+      <groupId>net.stickycode.prybar</groupId>
+      <artifactId>prybar-api</artifactId>
+      <version>[1,2)</version>
+    </dependency>
+
+    <dependency>
       <groupId>net.stickycode.composite</groupId>
       <artifactId>sticky-composite-logging-api</artifactId>
       <version>[3,4)</version>
