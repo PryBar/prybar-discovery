@@ -9,9 +9,8 @@ import org.yaml.snakeyaml.Yaml;
 
 import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
 import io.github.lukehutch.fastclasspathscanner.scanner.ScanResult;
-import net.stickycode.stereotype.StickyComponent;
 
-public class Application {
+public class PrybarDiscovery {
 
   private List<PrybarComponentDefinition> components = new ArrayList<>();
 
@@ -25,10 +24,8 @@ public class Application {
 
   public void scan(String... packages) {
     ScanResult scanner = new FastClasspathScanner(packages).scan();
-    List<String> componentAnnotations = scanner.getNamesOfAnnotationsWithMetaAnnotation(StickyComponent.class.getName());
-    componentAnnotations.add(StickyComponent.class.getName());
     List<String> componentsTypes = scanner
-      .getNamesOfClassesWithAnnotationsAnyOf(componentAnnotations.toArray(new String[componentAnnotations.size()]));
+      .getNamesOfClassesWithFieldAnnotation("javax.inject.Inject");
     for (String type : componentsTypes) {
       components.add(new PrybarComponentDefinition(type));
     }
